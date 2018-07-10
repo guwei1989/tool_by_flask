@@ -1,0 +1,308 @@
+<!--公用进度条-->
+<div class="modal fade" id="loadingModal" backdrop='static'>
+    <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div style="font-weight: bold">数据获取中，请稍等。。。</div>
+        <div class="progress progress-striped active" id="progress_bar" style="margin-bottom: 0;">
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+<!--公用进度条-->
+
+<!--车场信息初始化进度条-->
+<div class="modal fade" id="parkname_init_loadingModal" backdrop='static'>
+    <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div style="font-weight: bold">车场信息初始化中，请稍等。。。</div>
+        <div class="progress progress-striped active" id="progress_bar" style="margin-bottom: 0;">
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+<!--车场信息初始化进度条-->
+
+<!--车场IP列表获取进度条-->
+<div class="modal fade" id="parkip_init_loadingModal" backdrop='static'>
+    <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div style="font-weight: bold">车场ARM IP列表获取中，请稍等。。。</div>
+        <div class="progress progress-striped active" id="progress_bar" style="margin-bottom: 0;">
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+<!--车场IP列表获取进度条-->
+
+<!--场内记录导出的模态窗-->
+<div class="modal fade" id="export_inside_modal" tabindex="-1" role="dialog" aria-labelledby="">
+    <iframe id="download_frame" style="display:none;"></iframe>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">场内记录导出</h4>
+            </div>
+            <div class="modal-body">
+                <label>截止日期：</label>
+                <input type="text" style="width:135px;margin-left:30px;" value="2018-01-01 00:00:00"
+                       id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii:ss">
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_export" class="loading_img"
+                     style="margin-right: 100px;"/>
+                <button class="btn btn-default" id="export_btn" style="width:70px;margin-left:30px;">
+                    <span class="glyphicon glyphicon-save-file"></span> 导出
+                </button>
+                <button class="btn btn-default" id="delete_btn" style="width:70px;margin-left:30px;">
+                    <span class="glyphicon glyphicon-trash"></span> 删除
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--场内记录导出的模态窗-->
+
+<!--数据库备份与还原的模态窗-->
+<div class="modal fade" id="db_dumps_reset" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">数据库备份与还原</h4>
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_dump" class="loading_img"
+                     style="margin-right: 100px;"/>
+                <button class="btn btn-default" id="db_dump_btn" style="width:70px;margin-left:30px;">
+                    <span class="glyphicon glyphicon-folder-open"></span> 备份
+                </button>
+                <!--<button class="btn btn-default" id="db_reset_btn" style="width:70px;margin-left:30px;">-->
+                <!--<span class="glyphicon glyphicon-repeat"></span> 还原-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--数据库备份与还原的模态窗-->
+
+<!--授权期限BUG的模态窗-->
+<div class="modal fade" id="auth_time_bug" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">授权期限BUG修复
+                    <font color="red" size="3">(警告：此功能仅用于339X之前版本升级到339X版本)</font>
+                </h4>
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_auth_bug" class="loading_img"
+                     style="margin-right: 100px;"/>
+                <button class="btn btn-default" id="reduce_showtime_btn_auth_bug" style="width:95px;margin-left:30px;"
+                        data-toggle="tooltip" data-placement="left"
+                        title="此功能会将界面显示授权到期日减少一天，实际授权日不变（收入不受影响）">
+                    <span class="glyphicon glyphicon-eye-open"></span> 修改显示
+                </button>
+                <button class="btn btn-default" id="extend_authtime_btn_auth_bug" style="width:95px;margin-left:30px;"
+                        data-toggle="tooltip" data-placement="bottom"
+                        title="此功能会将实际的授权时间延长一天，界面显示不变（给客户延长一天）">
+                    <span class="glyphicon glyphicon-user"></span> 延长授权
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--授权期限BUG的模态窗-->
+
+<!--异常进出车数量修改的模态窗-->
+<div class="modal fade" id="abnormal_inourt_num" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">异常进出车数量修改
+                    <font color="red" size="3">(警告：此功能仅用于南京医院定制项目)</font>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label>异常进出车数量：</label>
+                        <input type="text" id="abnormal_num" style="width:130px;" placeholder="请输入>=0的正整数"
+                               onKeyUp="this.value=this.value.replace(/[^\.\d]/g,'');this.value=this.value.replace('.','');"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_abnormal" class="loading_img"
+                     style="margin-right: 100px;"/>
+                <button class="btn btn-default" id="db_ok_btn_njgl" style="width:70px;margin-left:30px;">
+                    <span class="glyphicon glyphicon-ok"></span> 确认
+                </button>
+                <button class="btn btn-default" data-dismiss="modal" style="width:70px;margin-left:30px;">
+                    <span class="glyphicon glyphicon-remove"></span> 取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--异常进出车数量修改的模态窗-->
+
+<!--frp授权验证模态窗-->
+<div class="modal fade" id="frp_auth" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">FRP授权验证
+                </h4>
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_frp_auth" class="loading_img"
+                     style="margin-right: 150px;"/>
+                <button class="btn btn-default" id="auth_btn_frp_auth" style="margin-left:30px;">
+                    <span class="glyphicon glyphicon-ok"></span> 获取授权
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--frp授权验证模态窗-->
+
+
+<!--进出车流程分析的模态窗-->
+<div class="modal fade" id="car_out_process" tabindex="-1" role="dialog" aria-labelledby="">
+    <iframe id="download_frame" style="display:none;"></iframe>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">进出车流程分析</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="input-daterange input-group" id="datepicker_in_out">
+                            <label>出场日期：</label>
+                            <input type="text" style="width: 150px;margin-left: 35px;" id="datetime_in_out">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label>车牌号：</label>
+                        <input type="text" id="in_out_plate" style="width:135px;margin-left:30px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <div id="out_time_list" style="visibility: hidden;margin-top:10px;">
+                            <label>出场时间：</label>
+                            <select style="width: 160px;margin-left:30px;height: 30px;" id="out_time">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <div style="margin: 10px 0 0 40px;">
+                            <button class="btn btn-default" id="get_out_time_btn">
+                                <span class=""></span> 点击分析
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <HR SIZE=5 style="display: none" id="line">
+
+                <div class="row" id="in_out_info_row" style="display: none">
+                    <div class="col-lg-12 col-md-12">
+                        <nav>
+                            <ul id="in_out_info" style="overflow:hidden; overflow-y:scroll;"></ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_in_out_process" class="loading_img"
+                     style="margin-right: 200px;"/>
+
+                <button class="btn btn-default" id="in_out_process_btn" style="visibility: hidden;float:right;">
+                    <span class="glyphicon glyphicon-ok"></span> 选择具体出场时间进行分析
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--进出车流程分析的模态窗-->
+
+
+<!--文件上传的模态窗-->
+<div class="modal fade" id="file_upload" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">文件上传</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                        <form>
+                            <input type="file" id="FileUpload" name="FileUpload" style="color: red;">
+                        </form>
+
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label>文件路径：</label>
+                        <input type="text" id="file_path" style="width:130px;"/>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label>版本号码：</label>
+                        <input type="text" id="version" style="width:130px;" value="3.3.9.9"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <img src="/static/pic/loading.gif" id="loading_gif_file_upload" class="loading_img"
+                     style="margin-right: 200px;"/>
+                <button class="btn btn-default" id="upload_btn">
+                    点击上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--文件上传的模态窗-->

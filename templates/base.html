@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>艾润物联©</title>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/uploadify.css">
+    <link rel="stylesheet" href="/static/css/my_design.css">
+    <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></Script>
+    <script type="text/javascript" src="/static/js/jquery.highlight.js"></script>
+    <script type="text/javascript" src="/static/bootstrap-3.3.7/dist/js/bootstrap.min.js"></Script>
+    <script type="text/javascript" src="/static/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js"></Script>
+    <script type="text/javascript" src="/static/js/bootbox.min.js"></Script>
+    <script type="text/javascript" src="/static/js/echarts.min.js"></Script>
+    <script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+    <Script type="text/javascript" src="/static/js/utils.js"></Script>
+    <Script type="text/javascript" src="/static/js/download.js"></Script>
+    <script type="text/javascript" src="/static/task_js/param_init.js"></script>
+    <Script type="text/javascript" src="/static/task_js/system_status.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/inside_export.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/v3_db_backup.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/auth_bug_repair.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/abnormal_num_modify_njgl.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/frp_auth.js"></Script>
+    <Script type="text/javascript" src="/static/task_js/arm_check.js"></Script>
+    <script type="text/javascript" src="/static/task_js/car_in_out_process.js"></script>
+    <script type="text/javascript" src="/static/task_js/file_upload.js"></script>
+</head>
+
+<body class="container-fluid">
+
+{% include "modal.html" %}
+
+<ul class="nav nav-pills" role="tablist" style="margin-top:15px">
+    <li role="presentation" class="active">
+        <a href="#system_status" role="tab" id="tab1" data-toggle="tab" style="display:inherit">系统监测</a>
+    </li>
+    <li role="presentation">
+        <a href="#data_maintain" role="tab" id="tab2" data-toggle="tab" style="display:inherit">数据维护</a>
+    </li>
+    <li role="presentation">
+        <a href="#arm_check" role="tab" id="tab3" data-toggle="tab" style="display:inherit">ARM体检</a>
+    </li>
+    <li role="presentation">
+        <a href="#version_update" role="tab" id="tab4" data-toggle="tab" style="display:none">版本升级</a>
+    </li>
+    <li role="presentation">
+        <a href="#problem_analyse" role="tab" id="tab5" data-toggle="tab" style="display:inherit">现场问题分析</a>
+    </li>
+    <li role="presentation">
+        <a href="#document_view" role="tab" id="tab6" data-toggle="tab" style="display:none">帮助文档</a>
+    </li>
+
+    {% include "param_init.html" %}
+
+</ul>
+
+<HR SIZE=5>
+
+<!-- 面板区 -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="system_status">
+        {% include "system_status.html" %}
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="data_maintain">
+        {% include "data_maintain.html" %}
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="arm_check">
+        {% include "arm_check.html" %}
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="version_update">
+        version update
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="problem_analyse">
+        {% include "problem_analyse.html" %}
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="document_view">
+        document view
+    </div>
+</div>
+
+</body>
+
+</html>

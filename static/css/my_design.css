@@ -1,0 +1,65 @@
+.cpu_css {
+    height: 240px;
+    width: 500px;
+    margin: 10px 10px 0px 10px;
+    position: fixed;
+}
+
+.ram_css {
+    height: 240px;
+    width: 500px;
+    margin: 10px 10px 0px 10px;
+    position: fixed;
+}
+
+.rom_css {
+    height: 240px;
+    width: 500px;
+    margin: 10px 10px 0px 10px;
+    position: fixed;
+}
+
+.network_css {
+    height: 240px;
+    width: 500px;
+    margin: 10px 10px 0px 10px;
+    position: fixed;
+}
+
+.loading_img {
+    height: 30px;
+    width: 30px;
+    visibility: hidden;
+}
+
+.icon_style {
+    height: 70px;
+    width: 70px;
+    margin: 0 0 10px 10px;
+}
+
+.highlight {
+    background-color: red;
+}
+
+body {
+    background-color: #FFFFF0;
+    /* background-image: url('../pic/irain_logo.png'); */
+}
+
+/* img:hover
+{
+    opacity:1;
+} */
+
+.icon-search {
+    position: absolute;
+    /*left: 0;*/
+    z-index: 5;
+    background-image: url(../pic/search.svg); /*引入图片图片*/
+    background-repeat: no-repeat; /*设置图片不重复*/
+    background-position: 0px 0px; /*图片显示的位置*/
+    background-attachment:fixed;
+    width: 100px; /*设置图片显示的宽*/
+    height: 100px; /*图片显示的高*/
+}

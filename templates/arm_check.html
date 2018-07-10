@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <button class="btn btn-success" type="submit" id="arm_check_btn" style="float:left;margin-left:45px">
+            <span class="glyphicon glyphicon-user"></span>一键体检
+        </button>
+    </div>
+
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="check_now" style="color: red"></div>
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <div class="progress" style="margin-top:5px;">
+            <div class="progress-bar progress-bar-striped active" id="check_progress" role="progressbar"
+                 aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<HR SIZE=5>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <header style="font-weight: bold; margin-left: 50px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;检查结果
+        </header>
+        <nav>
+            <ul id="check_info" style="height:480px;overflow:hidden; overflow-y:scroll;"></ul>
+        </nav>
+    </div>
+</div>

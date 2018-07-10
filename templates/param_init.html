@@ -1,0 +1,32 @@
+<div style="margin: 15px 0 0 40%;">
+    <div style="float: left">
+        <label>连接方式：</label>
+        <select class="selectpicker" id="oprate_type">
+            <option>Frp模式</option>
+            <option>内网模式</option>
+        </select>
+    </div>
+    <div style="float: left;margin-left: 15px;">
+        <div id="park_name_type" style="display: inherit;">
+            <label for="park_name" style="float: left;margin-top: 5px;">车场名称：</label>
+            <input type="text" class="form-control" id="park_name" style="width:180px;float: left;"
+                   placeholder="请输入要监测的车场名称"/>
+            <button type="button" class="btn btn-defaul" id="ip_list_btn" style="float: left;display:inherit"
+                    title="点击获取车场所有IP列表">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <div style="float: left;display: none;" id="ip_list_info">
+                <label>IP列表：</label>
+                <select class="selectpicker" id="ip_list" style="float: left;"></select>
+            </div>
+        </div>
+        <div id="inout_net_type" style="display: none;">
+            <label style="float:left;margin-top: 5px;">IP：</label>
+            <input type="text" class="form-control" id="arm_address" style="width:130px;float:left;"
+                   value="192.168.55.52" placeholder="输入要监测的IP"/>
+            <label style="float: left;margin-top: 5px;">端口号：</label>
+            <input type="text" class="form-control" id="arm_port" style="width:75px; float: left;" value="22"
+                   placeholder="端口号"/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div>
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div id="park_info" style="display: none;color: red;float: left;margin-left: 30px"></div>
+            <img src="/static/pic/loading.gif" id="loading_gif_status" class="loading_img" style="margin-left: 80%;"/>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <button class="btn btn-success" id="get_sys_status_btn"
+                    style="margin:0 10px 15px 0;">
+                <span class="glyphicon glyphicon-stats"></span> 获取系统状态
+            </button>
+            <button class="btn btn-danger" id="disconnect_arm_btn"
+                    style="margin:0 10px 15px 0;">
+                <span class="glyphicon glyphicon-remove"></span> 断开连接
+            </button>
+            <button class="btn btn-info" id="arm_restart" style="margin:0 10px 15px 0;">
+                <span class="glyphicon glyphicon-off"></span> 一键重启
+            </button>
+        </div>
+    </div>
+
+    <HR SIZE=5>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="cpu_css" id="cpu_status_chart"></div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="ram_css" id="ram_status_chart"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="rom_css" id="rom_status_chart"></div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="network_css" id="network_status_chart"></div>
+        </div>
+    </div>
+</div>
