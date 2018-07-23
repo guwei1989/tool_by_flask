@@ -18,7 +18,6 @@ class Job(object):
     """
     public api
     """
-
     def __init__(self):
         self.job_id = str(uuid.uuid4())
         self._status = JobStatus.INIT

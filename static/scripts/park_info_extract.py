@@ -220,7 +220,9 @@ def _normal_out(line, line_no, lines):
             cost = float(match.group(1))
             return log_time, u'整体耗时', {u'耗时': cost}
     elif '已经支付的记录' in line:
-        match = re.search(r'''charge_time': (.*?), '.*serial_no': u'(.*?)'.*pay_type': (.*?)L.*value': (.*?)L.*charge_order_number': u'(.*?)'}''', line)
+        match = re.search(
+            r'''charge_time': (.*?), '.*serial_no': u'(.*?)'.*pay_type': (.*?)L.*value': (.*?)L.*charge_order_number': u'(.*?)'}''',
+            line)
         if match:
             charge_time = eval(match.group(1))
             serial_no = match.group(2).decode('utf-8')
@@ -299,7 +301,9 @@ def _normal_out(line, line_no, lines):
         if match:
             e_coupon_list_str = match.group(1)
             e_coupon_list = eval(e_coupon_list_str)
-            return log_time, u'电子券', {u'电子券': [{u'券类型': ecoupon_lookup[x['e_type']] if x['e_type'] in ecoupon_lookup else u'未知%d' % x['e_type'], u'备注': x['remarks'], u'券值': x['value']} for x in e_coupon_list]}
+            return log_time, u'电子券', {u'电子券': [
+                {u'券类型': ecoupon_lookup[x['e_type']] if x['e_type'] in ecoupon_lookup else u'未知%d' % x['e_type'],
+                 u'备注': x['remarks'], u'券值': x['value']} for x in e_coupon_list]}
 
 
 def _online_pay_at_outport(line, line_no, lines):

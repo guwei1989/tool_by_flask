@@ -1,4 +1,7 @@
 # coding: utf-8
+import threading
+import os
+
 from multiprocessing.pool import ThreadPool
 from threading import RLock
 from src.job.job import LogType
@@ -47,19 +50,28 @@ def _handle_one_park(info):
 
 
 def _v3(client, info):
+    ts = []
+
     def task(ssh_client, ip, version):
-        try:
-            print 'trying ', info['name'], ' ', ip
-            inner_j = RemoteScriptJob(ssh_client, 'static/scripts/llrp_install.py')
-            inner_j.run()
-            for j_log in inner_j.read_all():
-                if j_log.log_type == LogType.INFO:
-                    pass
-            ssh_client.close()
-        except Exception, err:
-            print info['name'], ' ', ip, str(err), traceback.format_exc()
+
+        def work():
+            try:
+                print 'trying ', info['name'], ' ', ip
+                inner_j = RemoteScriptJob(ssh_client, 'static/scripts/llrp_install.py')
+                inner_j.run()
+                for j_log in inner_j.read_all():
+                    if j_log.log_type == LogType.INFO:
+                        pass
+                ssh_client.close()
+            except Exception, err:
+                print info['name'], ' ', ip, str(err), traceback.format_exc()
+
+        t = threading.Thread(target=work)
+        ts.append(t)
+        t.start()
 
     run_all_arm(client, task)
+    map(lambda x: x.join(), ts)
 
 
 def _v2(client, info):
@@ -84,8 +96,6 @@ def str_similarity(str_a, str_b, w_tb_a):
 
 
 if __name__ == '__main__':
-    import os
-
     os.chdir('../../..')
 
     # conns = frp.get_all_conn_info()
@@ -93,10 +103,6 @@ if __name__ == '__main__':
 
     handle_f = open('records.txt', 'w+')
 
-    with open('log.txt', 'r') as f:
-        lines = f.readlines()
-        filtered = [line.split(' ')[0] for line in lines if 'fail' in line]
-
-    deploy(['西安御城龙脉南区'])
+    deploy(['西安环普产业园'])
 
     handle_f.close()

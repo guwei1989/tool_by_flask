@@ -94,7 +94,7 @@ $(document).ready(function () {
             data: {
                 vpr_plate: vpr,
                 park_name: parkName,
-                park_date: datetime
+                park_time: datetime
             },
             success: function (data, err) {
                 if (data.code == 0) {
@@ -103,7 +103,7 @@ $(document).ready(function () {
                     var task = setInterval(function () {
                         $.ajax({
                             type: 'GET',
-                            url: '/api/job/task_new_logs',
+                            url: '/api/job/output',
                             data: {
                                 task_id: taskId
                             },
@@ -146,29 +146,29 @@ $(document).ready(function () {
         $("#in_out_info").css("height", 300);
         $("#line").css("display", "inherit");
 
-        $("#in_out_info").append("<li>车   牌：  " + info["车牌"] + "</li>");
-        $("#in_out_info").append("<li>入场时间：  " + (new Date(info["入场时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>入场记录上报时间：  " + (new Date(info["入场记录上报时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>出场时间：  " + (new Date(info["出场时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>出场记录上报时间：  " + (new Date(info["出场记录上报时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>出场方式：  " + info["出场方式"] + "</li>");
+        $("#in_out_info").append("<li>车   牌：  " + info["vpr"] + "</li>");
+        $("#in_out_info").append("<li>入场时间：  " + info["in_time"] + "</li>");
+        $("#in_out_info").append("<li>入场记录上报时间：  " + info["in_upload_time"] + "</li>");
+        $("#in_out_info").append("<li>出场时间：  " + info["out_time"] + "</li>");
+        $("#in_out_info").append("<li>出场记录上报时间：  " + info["out_upload_time"] + "</li>");
+        $("#in_out_info").append("<li>出场方式：  " + info["out_type"] + "</li>");
 
-        if (info["出口计费详情"]) {
+        if (info["out_charge_detail"]) {
             $("#in_out_info").append("<li id='charge_rule'>出口计费详情：  </li>");
 
-            for (var j = 0; j < info["出口计费详情"].length; j++) {
+            for (var j = 0; j < info["out_charge_detail"].length; j++) {
 
-                var date1 = (new Date(info["出口计费详情"][j][1])).toLocaleTimeString();
-                var date2 = (new Date(info["出口计费详情"][j][2])).toLocaleTimeString();
+                var date1 = info["out_charge_detail"][j][1];
+                var date2 = info["out_charge_detail"][j][2];
 
-                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["出口计费详情"][j][0] + "</div>");
+                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["out_charge_detail"][j][0] + "</div>");
                 $("#charge_rule").append("<div style='margin-left: 30px;'>" + date1 + "</div>");
                 $("#charge_rule").append("<div style='margin-left: 30px;'>" + date2 + "</div>");
-                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["出口计费详情"][j][3] + "元</div>");
+                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["out_charge_detail"][j][3] + "元</div>");
                 $("#charge_rule").append("<HR SIZE=5>")
             }
         }
-        $("#in_out_info").append("<li>出口报费：  " + info["出口报费"] + "元</li>");
+        $("#in_out_info").append("<li>出口报费：  " + info["price"] + "元</li>");
         if (info["电子券"]) {
             $("#in_out_info").append("<li id='e_coupon'>电子券：  </li>");
 
@@ -181,72 +181,72 @@ $(document).ready(function () {
                 $("#e_coupon").append("<HR SIZE=5>")
             }
         }
-        $("#in_out_info").append("<li>出口抬杆时间：  " + (new Date(info["抬杆时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>出场时授权：  " + info["出场时授权"] + "</li>");
-        $("#in_out_info").append("<li>原本授权：  " + info["原本授权"] + "</li>");
+        $("#in_out_info").append("<li>出口抬杆时间：  " + info["open_time"] + "</li>");
+        $("#in_out_info").append("<li>出场时授权：  " + info["cur_auth"] + "</li>");
+        $("#in_out_info").append("<li>原本授权：  " + info["ori_auth"] + "</li>");
         if (info["授权占用车牌"]) {
-            $("#in_out_info").append("<li>授权占用车牌：  " + info["授权占用车牌"] + "</li>");
+            $("#in_out_info").append("<li>授权占用车牌：  " + info["auth_occupy_vpr"] + "</li>");
         }
         if (info["授权生效时间"]) {
-            $("#in_out_info").append("<li>授权生效时间：  " + (new Date(info["授权生效时间"])).toLocaleTimeString() + "</li>");
+            $("#in_out_info").append("<li>授权生效时间：  " + info["auth_takeeffect_time"] + "</li>");
         }
-        $("#in_out_info").append("<li>停车时长：  " + formatSeconds(info["停车时长"]) + "</li>");
-        $("#in_out_info").append("<li>大小车类型：  " + info["大小车类型"] + "</li>");
-        $("#in_out_info").append("<li>能源类型：  " + info["能源类型"] + "</li>");
-        if (info["计费规则"]) {
-            $("#in_out_info").append("<li>计费规则：  " + info["计费规则"] + "</li>");
+        $("#in_out_info").append("<li>停车时长：  " + formatSeconds(info["park_duration"]) + "</li>");
+        $("#in_out_info").append("<li>大小车类型：  " + info["car_size_type"] + "</li>");
+        $("#in_out_info").append("<li>能源类型：  " + info["energy_type"] + "</li>");
+        if (info["charge_rule"]) {
+            $("#in_out_info").append("<li>计费规则：  " + info["charge_rule"] + "</li>");
         }
-        $("#in_out_info").append("<li>预留时间：  " + info["预留时间"] + "秒</li>");
-        if (info["跨时段叠加"]) {
-            $("#in_out_info").append("<li>跨时段叠加：  " + (info["跨时段叠加"]).toString() + "</li>");
+        $("#in_out_info").append("<li>预留时间：  " + info["reserve_time"] + "秒</li>");
+        if (info["corss_overlap"]) {
+            $("#in_out_info").append("<li>跨时段叠加：  " + (info["corss_overlap"]).toString() + "</li>");
         }
-        if (info["历史支付时间"]) {
-            $("#in_out_info").append("<li>历史支付时间：  " + (new Date(info["历史支付时间"])).toLocaleTimeString() + "</li>");
+        if (info["history_pay_time"]) {
+            $("#in_out_info").append("<li>历史支付时间：  " + info["history_pay_time"] + "</li>");
         }
-        if (info["历史支付订单"]) {
-            $("#in_out_info").append("<li>历史支付订单：  " + info["历史支付订单"] + "</li>");
+        if (info["history_pay_no"]) {
+            $("#in_out_info").append("<li>历史支付订单：  " + info["history_pay_no"] + "</li>");
         }
-        if (info["历史计费订单"]) {
-            $("#in_out_info").append("<li>历史计费订单：  " + info["历史计费订单"] + "</li>");
+        if (info["history_charge_no"]) {
+            $("#in_out_info").append("<li>历史计费订单：  " + info["history_charge_no"] + "</li>");
         }
-        if (info["历史支付类型"]) {
-            $("#in_out_info").append("<li>历史支付类型：  " + info["历史支付类型"] + "</li>");
+        if (info["history_pay_type"]) {
+            $("#in_out_info").append("<li>历史支付类型：  " + info["history_pay_type"] + "</li>");
         }
-        if (info["历史支付金额"]) {
-            $("#in_out_info").append("<li>历史支付金额：  " + info["历史支付金额"] + "元</li>");
+        if (info["history_pay_amount"]) {
+            $("#in_out_info").append("<li>历史支付金额：  " + info["history_pay_amount"] + "元</li>");
         }
 
-        if (info["历史计费详情"]) {
+        if (info["history_charge_detail"]) {
             $("#in_out_info").append("<li id='charge_rule'>历史计费详情：  </li>");
 
-            for (var j = 0; j < info["历史计费详情"].length; j++) {
+            for (var j = 0; j < info["history_charge_detail"].length; j++) {
 
-                var date1 = (new Date(info["历史计费详情"][j][1])).toLocaleTimeString();
-                var date2 = (new Date(info["历史计费详情"][j][2])).toLocaleTimeString();
+                var date1 = info["history_charge_detail"][j][1];
+                var date2 = info["history_charge_detail"][j][2];
 
-                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["历史计费详情"][j][0] + "</div>");
+                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["history_charge_detail"][j][0] + "</div>");
                 $("#charge_rule").append("<div style='margin-left: 30px;'>" + date1 + "</div>");
                 $("#charge_rule").append("<div style='margin-left: 30px;'>" + date2 + "</div>");
-                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["历史计费详情"][j][3] + "元</div>");
+                $("#charge_rule").append("<div style='margin-left: 30px;'>" + info["history_charge_detail"][j][3] + "元</div>");
                 $("#charge_rule").append("<HR SIZE=5>")
             }
         }
 
-        if (info["历史计费规则"]) {
-            $("#in_out_info").append("<li>历史计费规则：  " + info["历史计费规则"] + "</li>");
+        if (info["history_charge_rule"]) {
+            $("#in_out_info").append("<li>历史计费规则：  " + info["history_charge_rule"] + "</li>");
         }
-        if (info["历史计费结果"]) {
-            $("#in_out_info").append("<li>历史计费结果：  " + info["历史计费结果"] + "元</li>");
+        if (info["history_charge_amount"]) {
+            $("#in_out_info").append("<li>历史计费结果：  " + info["history_charge_amount"] + "元</li>");
         }
 
-        $("#in_out_info").append("<li>数据库查费时间：  " + (new Date(info["数据库查费时间"])).toLocaleTimeString() + "</li>");
-        $("#in_out_info").append("<li>进车记录id：  " + info["进车记录id"] + "</li>");
-        $("#in_out_info").append("<li>出车记录id：  " + info["出车记录id"] + "</li>");
-        $("#in_out_info").append("<li>出场耗时：  " + info["耗时"] + "秒</li>");
+        $("#in_out_info").append("<li>数据库查费时间：  " + info["db_charge_lookup_time"] + "</li>");
+        $("#in_out_info").append("<li>进车记录id：  " + info["park_in_id"] + "</li>");
+        $("#in_out_info").append("<li>出车记录id：  " + info["park_out_id"] + "</li>");
+        $("#in_out_info").append("<li>出场耗时：  " + info["out_cost"] + "秒</li>");
 
 
-        $("#in_out_info").append("<li>抬杆透传相机：  " + info["抬杆透传相机"] + "</li>");
-        $("#in_out_info").append("<li>语音透传相机：  " + info["语音透传相机"] + "</li>");
+        $("#in_out_info").append("<li>抬杆透传相机：  " + info["open_vpr"] + "</li>");
+        $("#in_out_info").append("<li>语音透传相机：  " + info["voice_vpr"] + "</li>");
         // $("#in_out_info").append("<li>出场识别仪IP：  " + info["识别仪地址"] + "</li>");
     }
 });

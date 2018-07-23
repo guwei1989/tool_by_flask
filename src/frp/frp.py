@@ -75,8 +75,8 @@ class FrpManager:
     def get_conn(self, conn_name):
         # return SSHClient, int_version
 
-        if conn_name in self.conn_pool:
-            return self.conn_pool[conn_name][0]
+        # if conn_name in self.conn_pool:
+        #     return self.conn_pool[conn_name][0]
 
         conn_info = self.get_conn_info(conn_name)
         if not conn_info:

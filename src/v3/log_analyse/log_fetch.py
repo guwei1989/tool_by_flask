@@ -2,7 +2,6 @@
 import os
 from enum import Enum
 import datetime
-import threading
 import tarfile
 import shutil
 import posixpath

@@ -17,7 +17,7 @@ def log_parse():
         port = int(request.form.get('port'))
         ssh = frp.get_conn(host=ip, port=port)
     if ssh is None:
-        return jsonify({'code': 1, 'msg': '无法连接目标，当前暂不支持v2版本'}), 500
+        return jsonify({'code': 1, 'result': '无法连接目标，当前暂不支持v2版本'}), 500
 
     log_type = request.form.get('log_type')
     log_date = request.form.get('datetime_start')

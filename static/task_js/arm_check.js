@@ -24,7 +24,7 @@ $(document).ready(function () {
                     intervalJob = setInterval(function () {
                         $.ajax({
                             type: 'GET',
-                            url: "/api/job/task_new_logs",
+                            url: "/api/job/output",
                             data: {"task_id": task_id},
                             success: function (chunk, textStatus) {
                                 data = chunk;

@@ -3,14 +3,14 @@ import datetime
 import json
 
 from flask import request, jsonify
-from src.frp.frp import frp
+from src.frp.llrp import frp
 from src.job.job_system import jobsystem
 from src.utils.quick import get_mysql_addr, execute_shell
 from src.v3.problem_check.park_out_flow import ParkFlowJob
 
 
 def park_flow_analyse():
-    park_time = request.args.get('park_date')
+    park_time = request.args.get('park_time')
     vpr_plate = request.args.get('vpr_plate')
     park_name = request.args.get('park_name')
 
@@ -20,7 +20,7 @@ def park_flow_analyse():
     jobsystem.run(j)
     return json.dumps({
         'code': 0,
-        'msg': 'success',
+        'result': 'success',
         "task_id": j.job_id
     })
 
@@ -36,7 +36,7 @@ def park_records():
     if not conn:
         return jsonify({
             'code': 1,
-            'msg': 'Could not establish connection to %s' % park_name,
+            'result': '无法建立到 %s 的连接' % park_name,
             'records': []
         })
 
@@ -51,7 +51,7 @@ def park_records():
 
     return jsonify({
         'code': 0,
-        'msg': 'success',
+        'result': 'success',
         'records': [{'vpr': x[0], 'terminal_ip': x[1], 'out_time': x[3]} for x in all_records]
     })
 
