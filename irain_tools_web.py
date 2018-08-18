@@ -22,7 +22,7 @@ def homepage():
 
 def run():
     port = 9494 if len(sys.argv) == 1 else int(sys.argv[1])
-    app.run('0.0.0.0', port, threaded=True)
+    app.run('0.0.0.0', port, threaded=True, debug=True)
 
 
 if __name__ == '__main__':

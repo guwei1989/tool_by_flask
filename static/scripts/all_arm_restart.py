@@ -33,14 +33,12 @@ if __name__ == "__main__":
     try:
         threads = []
 
-
         def work(addr):
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh.connect(addr[0], port=22, username='root', password='iraindev10241GB', timeout=60)
             _, stdout, _ = ssh.exec_command("cd /home/park;sh restart.sh")
             stdout.read()
-
 
         for ip in ip_list:
             t = threading.Thread(target=work, args=(ip,))
